@@ -7,11 +7,26 @@ GET     /                           controllers.Application.index
 
 GET			/people																	controllers.PeopleController.index
 PUT			/people/:id										controllers.PeopleController.update(id: String)
+POST		/people												controllers.PeopleController.create
 
 GET			/tasks/:id										controllers.Application.getTask(id: String)
 POST		/tasks														controllers.Application.create
 
+GET			/documents									controllers.DocumentsController.index(parent: Option[String])
 POST    /documents									controllers.DocumentsController.create
+GET			/documents/:parent									controllers.DocumentsController.findByParent(parent: String)
+
+GET			/nodes											controllers.NodesController.index
+
+GET			/docs												controllers.DocsController.index(parent: Option[String])
+GET			/docs/:id										controllers.DocsController.find(id: String)
+GET			/docs/children/:id					controllers.DocsController.findChildren(id: String)
+POST		/docs												controllers.DocsController.create
+
+POST		/things											controllers.ChildController.create
+
+
+GET			/attachments/:id								controllers.AttachmentsController.findById(id: String)
 
 
 

@@ -20,6 +20,24 @@ object PeopleController extends Controller with MongoController {
 	import play.modules.reactivemongo.json.BSONFormats._
 	
 	lazy val collection = db.collection[JSONCollection]("people")
+	
+	def create = Action.async(parse.json) {request => 
+		request.body.validate[PersonParam].map { param => 
+			collection.insert(param.person).map { lastError =>
+
+				val person = Json.obj(
+					"person" -> Json.obj(
+									"id" -> Json.toJson(param.person._id) \ "$oid",
+									"name" -> param.person.name,
+									"tasks" -> Json.arr()
+								)
+					)
+
+				Ok(person)
+
+			}
+		}.getOrElse(Future.successful(BadRequest("invalid json")))
+	}
 
 	def update(id: String) = Action.async(parse.json) { request =>
 
