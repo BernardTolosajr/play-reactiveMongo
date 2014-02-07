@@ -1,5 +1,4 @@
-package controllers
-
+package controllers 
 import play.api._
 import play.api.mvc._
 
@@ -35,6 +34,7 @@ object DocsController extends Controller with MongoController {
 						Json.obj(
 							"_id" -> node \ "_id",
 							"name" -> node \ "name",
+							"kind" -> node \ "kind",
 							"children" -> node \ "children"
 					)})
 
@@ -50,6 +50,7 @@ object DocsController extends Controller with MongoController {
 			val doc = Json.obj(
 							"name" -> param.doc.name,
 							"parent" -> (if (param.doc.parent == "0") param.doc.parent else new BSONObjectID(param.doc.parent)),
+							"kind" -> param.doc.kind,
 							"children" -> Json.arr()
 						)
 
@@ -76,6 +77,7 @@ object DocsController extends Controller with MongoController {
 						Json.obj(
 							"_id" -> node \ "_id",
 							"name" -> node \ "name",
+							"kind" -> node \ "kind",
 							"children" -> node \ "children"
 					)})
 
@@ -99,8 +101,8 @@ object DocsController extends Controller with MongoController {
 						Json.obj(
 							"_id" -> node \ "_id",
 							"name" -> node \ "name",
-							"children" -> node \ "children",
-							"attachments" -> node \ "attachments"
+							"kind" -> node \ "kind", 
+							"children" -> node \ "children"
 					)})
 
 				Ok(result)

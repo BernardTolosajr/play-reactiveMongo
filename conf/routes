@@ -27,8 +27,9 @@ POST		/things											controllers.ChildController.create
 
 
 GET			/attachments/:id								controllers.AttachmentsController.findById(id: String)
-
-
+PUT			/attachments/:id						controllers.AttachmentsController.attach(id: String)
+GET			/attachments/find/:id				controllers.AttachmentsController.findAttachment(id: String)
+GET			/attachments/download/:id		controllers.AttachmentsController.download(id: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

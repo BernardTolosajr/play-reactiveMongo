@@ -1,5 +1,4 @@
 package controllers 
-
 import play.api._
 import play.api.mvc._
 
@@ -28,8 +27,10 @@ object ChildController extends Controller with MongoController{
 						val parentId = new BSONObjectID(thing.thing.parent)
 
 						var modifier = Json.obj(
+														"_id" -> thing.thing._id,
 														"name" -> thing.thing.name,
 														"parent" -> parentId,
+														"kind" -> thing.thing.kind,
 														"children" -> Json.arr()
 														)
 
